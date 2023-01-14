@@ -13,9 +13,13 @@ function groupMetadata() {
       const dataObject = JSON.parse(data);
       groupedMetadata.push(dataObject);
       if (groupedMetadata.length == filesCount) {
+        const orderedMetadata = groupedMetadata.sort(
+          (a, b) => a.edition - b.edition
+        );
+
         fs.writeFileSync(
           "metadata.json",
-          JSON.stringify(groupedMetadata, null, 2)
+          JSON.stringify(orderedMetadata, null, 2)
         );
       }
     });
